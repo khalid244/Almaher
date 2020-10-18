@@ -4,5 +4,6 @@ module.exports = app => {
     app.get("/quran/", quran.getAll);
     app.get("/quran/findCloserAyah/:sorah/:ayah/:length/:method/", quran.findCloserAyah);
     app.get("/quran/findPageEnd/:sorah/:ayah/:method/", quran.findPageEnd);
+    app.get("/quran/:sorah/", quran.findLastAyah);
 };
   
