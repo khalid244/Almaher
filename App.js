@@ -8,15 +8,29 @@ export default class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
+      ayah: 5,
     };
   }
   
   componentDidMount() {
     console.log("componentDidMount");
-    fetch("http://localhost:9000/quran/2/6/15/0/")
+  }
+
+  connection() {
+
+    const newAyah = this.state.ayah + 1;
+    this.state.ayah = newAyah;
+    var d = new Date();
+    var s = d.getTime();
+    console.log("Start Time:", s);
+    fetch(`http://localhost:9000/quran/2/${newAyah}/15/0/`)
     .then(res => res.json())
     .then(
       (result) => {
+        var d = new Date();
+        var e = d.getTime();
+        console.log("End Time:", e);
+        console.log("Diff Time:", e-s);
         console.log(result);
         this.setState({
           isLoaded: true,
@@ -37,33 +51,28 @@ export default class App extends Component {
     )
   }
 
-  connection() {
-    console.log("connection", this.state.contacts);
-    // this.setState({
-    //   contacts: this.state.contacts + 1
-    // });
-
-  }
-
 
   render() {
     const { error, isLoaded, sorah, ayah, length } = this.state;
     console.log("error:",error);
     console.log("isLoaded:",isLoaded);
-    if (error) {
-      return <Text>Error: {error.message}</Text>;
-    } else if (!isLoaded) {
-      return <Text>Loading...</Text>;
-    } else {
+    // if (error) {
+    //   return <Text>Error: {error.message}</Text>;
+    // } else if (!isLoaded) {
+    //   return <Text>Loading...</Text>;
+    // } else {
       return (
         <View>
-          <Text>Sorah: {sorah}</Text>
-          <Text>Ayah: {ayah}</Text>
-          <Text>Length: {length}</Text>
-
+          <Button title="Connect" onPress={() => this.connection() } />
+          <View style={{marginTop: 16}}>
+            <Text>Sorah: {sorah}</Text>
+            <Text>Ayah: {ayah}</Text>
+            <Text>Length: {length}</Text>
+          
+          </View>
         </View>
       );
-    }
+    // }
   }
 
 }
