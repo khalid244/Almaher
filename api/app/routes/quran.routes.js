@@ -3,5 +3,6 @@ module.exports = app => {
     
     app.get("/quran/", quran.getAll);
     app.get("/quran/:sorah/:ayah/:length/:type/", quran.findCloserDestination);
+    app.get("/quran/:sorah/", quran.findLastAyah);
 };
   

@@ -26,3 +26,19 @@ exports.getAll = (req, res) => {
         else res.send(data);
     });
 };
+
+exports.findLastAyah = (req, res) => {
+    Quran.findLastAyahInGivenSorah(req.params.sorah, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found Last Ayah ${req.params.sorah}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Error retrieving destination with sorah ${req.params.sorah}.`
+                });
+            }
+        } else res.send(data);
+    }); 
+};
