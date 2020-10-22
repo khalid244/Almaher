@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
 
 export default class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      isLoaded: false,
-      ayah: 5,
+      text: "hello world !!!",
+      onclick: {color: "#F00"},
+      st: 0,
+      sorah: "2",
+      ayah: "6",
+      line: "15",
+      direction: "0"
     };
   }
   
@@ -16,39 +20,61 @@ export default class App extends Component {
     console.log("componentDidMount");
   }
 
+  givensorah(intext) {
+    this.setState({
+      sorah: intext      
+    })
+  }
+
+  givenayah(intext) {
+    this.setState({
+      ayah: intext
+    })
+  }
+
+  givenline(intext) {
+    this.setState({
+      line: intext
+    })
+  }
+  
+  givendirection(intext) {
+    this.setState({
+      direction: intext
+    })
+  }
+
   connection() {
 
-    const newAyah = this.state.ayah + 1;
-    this.state.ayah = newAyah;
-    var d = new Date();
-    var s = d.getTime();
-    console.log("Start Time:", s);
-    fetch(`http://localhost:9000/quran/2/${newAyah}/15/0/`)
-    .then(res => res.json())
-    .then(
-      (result) => {
-        var d = new Date();
-        var e = d.getTime();
-        console.log("End Time:", e);
-        console.log("Diff Time:", e-s);
-        console.log(result);
-        this.setState({
-          isLoaded: true,
-          sorah: result.Sorah,
-          ayah: result.Ayah,
-          length: result.RealLength,
-        });
-      },
-      // Note: it's important to handle errors here
-      // instead of a catch() block so that we don't swallow
-      // exceptions from actual bugs in components.
+    // this.state.text = "Booo ...."
+    // this.forceUpdate();
+
+    if (this.state.st==0) {
+      fetch(`http://localhost:9000/quran/findCloserAyah/${this.state.sorah}/${this.state.ayah}/${this.state.line}/${this.state.direction}/`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+          text: `${result.Ayah} ${result.Sorah}`,
+          onclick: {color: "#00F"},
+          });
+        },
       (error) => {
-        this.setState({
-          isLoaded: true,
-          error
-        });
+        
       }
+      )
+    } else (
+      this.setState({
+      text: "hello world !!!",
+      onclick: {color: "#F00"}
+      })
     )
+
+    // const newAyah = this.state.ayah + 1;
+    // this.state.ayah = newAyah;
+    // var d = new Date();
+    // var s = d.getTime();
+    // console.log("Start Time:", s);
   }
 
 
@@ -62,13 +88,38 @@ export default class App extends Component {
     //   return <Text>Loading...</Text>;
     // } else {
       return (
-        <View>
+        <View >
+          <TextInput
+           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={intext => this.givensorah(intext)}
+            placeholder="Enter Sorah's number" 
+            value= {this.state.sorah}
+          />
+          <TextInput
+           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={intext => this.givenayah(intext)}
+            placeholder="Enter ayah's number" 
+            value= {this.state.ayah}
+          />
+          <TextInput
+           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={intext => this.givenline(intext)}
+            placeholder="How many lines you want"
+            value= {this.state.line}
+          />
+          <TextInput
+           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={intext => this.givendirection(intext)}
+            placeholder="Which direction 0 or 1"
+            value= {this.state.direction}
+          />
           <Button title="Connect" onPress={() => this.connection() } />
           <View style={{marginTop: 16}}>
-            <Text>Sorah: {sorah}</Text>
+            {/* <Text>Sorah: {sorah}</Text>
             <Text>Ayah: {ayah}</Text>
             <Text>Length: {length}</Text>
-          
+           */}
+           <Text style={this.state.onclick}> {this.state.text} </Text>
           </View>
         </View>
       );
