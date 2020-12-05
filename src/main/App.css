@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+  background: #282c34;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 1s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  color: white;
+  background: #282c34;
+}
+
+.topBar {
+  background: #222;
+  width: 100%;
+  display: flex;
+}
+.topBarItem {
+  color: white;
+  padding: 12px;
+  margin-right: 0;
+  text-align: right;
+  right: 0px;
+}
+.topBarItem:hover {
+  background: #282c34;
+}
+
+
+.flexSpace {
+  flex: 1;
+}
+
+
+.button {
+  cursor: pointer;
+}
+
+
+.settings {
+  /* display: flex; */
+}
+
+.groupsContainer {
+  /* margin-top: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  width: fit-content; */
+  background-color: #222;
+  color: white;
+}
+
+.groupsContainerTitle {
+  text-align: right;
+  /* font-weight: bold; */
+}
+
+.group {
+  /* margin: 12px;
+  padding: 16px 20px;
+  border-radius: 5px; */
+  background-color: #333;
+}
+
+.groupTitle {
+  /* text-align: right;
+  font-size: 13pt;
+  font-weight: bold; */
+  /* margin-bottom: 16px; */
+}
