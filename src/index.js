@@ -4,6 +4,8 @@ import './index.css';
 import App from './main/App';
 import reportWebVitals from './main/reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
+import ComponentList from './Utilities/ComponentList';
+import ExportExcel from './Utilities/ExportExcel';
 
 ReactDOM.render(
   <React.StrictMode>
