@@ -225,6 +225,10 @@ function App() {
         realeLengthForDars.RealLength,
       ];
 
+      if(endOfLesson.Ayah == lastAyahInSoarh[0] && sour[LSoarh] == sour[0] || endOfLesson.Ayah == lastAyahInSoarh[lastAyahInSoarh.length -1] && sour[LSoarh] == sour[sour.length -1]){
+          return
+      }
+
       if(lam){        
         var FSoarhForEndOfLesson = endOfLesson.Sorah - 1;
         var FAyahForEndOfLesson = endOfLesson.Ayah;
@@ -311,7 +315,7 @@ function App() {
      realeLengthForDars = httpGet(
       `${httpName}/quran/findRealeLength/${FSoarh + 1}/${FAyah}/${endOfLesson.Sorah}/${endOfLesson.Ayah}/${methodForMurajaea}/`
     );
-
+    
       arrayForAllMurajaea[i] = [
         sour[FSoarh],
         FAyah,
